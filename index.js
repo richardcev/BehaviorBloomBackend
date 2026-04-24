@@ -51,7 +51,12 @@ function generateElegantEmail(payload) {
   if (payload.socialSecurity) docs.push("Social Security Card");
   if (payload.workAuthorization) docs.push("Work Authorization");
   if (payload.medicaidLetter) docs.push("Medicaid Welcome Letter");
-  if (payload.ein) docs.push("EIN");
+  
+  if (payload.ein) {
+    const einText = payload.einNumber ? `EIN (Number: ${payload.einNumber})` : "EIN";
+    docs.push(einText);
+  }
+
   const docsList = docs.length > 0 
     ? `<ul style="margin: 0; padding-left: 20px;">${docs.map(d => `<li>${d}</li>`).join('')}</ul>` 
     : 'None checked';
